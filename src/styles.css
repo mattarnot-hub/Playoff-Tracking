@@ -373,6 +373,14 @@ select {
 .slot-name {
   flex: 1;
 }
+.slot.numbered .slot-name {
+  color: var(--muted);
+  font-weight: 500;
+  font-style: italic;
+}
+.slot-main:disabled {
+  opacity: 1;
+}
 .handle {
   width: 52px;
   display: grid;

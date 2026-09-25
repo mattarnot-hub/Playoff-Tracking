@@ -138,6 +138,25 @@ export async function setLineup(gameId: number, playerIds: number[]) {
   });
 }
 
+/**
+ * Save a lineup where at-bats belong to the batting position, not the name: used when names are
+ * allocated to a numbered lineup after the fact. Placeholders are renumbered to match their spot
+ * ("Batter 2" is always in spot 2), and every at-bat takes the player now in its spot.
+ */
+export async function setLineupByPosition(gameId: number, ids: number[]) {
+  const norm = ids.map((id, i) => (id < 0 ? -(i + 1) : id));
+  await db.transaction('rw', db.lineupSlots, db.atBats, async () => {
+    await db.lineupSlots.where('gameId').equals(gameId).delete();
+    await db.lineupSlots.bulkAdd(norm.map((playerId, i) => ({ gameId, order: i + 1, playerId })));
+    const atBats = await db.atBats.where('gameId').equals(gameId).toArray();
+    for (const a of atBats) {
+      const pid = norm[a.order - 1];
+      if (pid != null && pid !== a.playerId) await db.atBats.update(a.id, { playerId: pid });
+    }
+  });
+  return norm;
+}
+
 /* ---------- backup ---------- */
 
 function blobToDataUrl(b: Blob): Promise<string> {

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, fullName, OUR_TEAM, setLineup, sortKey, withNumbered, type Player } from '../db';
+import { db, fullName, OUR_TEAM, setLineup, setLineupByPosition, sortKey, withNumbered, type Player } from '../db';
 import type { Nav } from '../App';
 import PhotoViewer from '../components/PhotoViewer';
 import Sheet, { Confirm } from '../components/Sheet';
@@ -25,9 +25,42 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
       db.lineupSlots.where('gameId').equals(gameId).sortBy('order').then((s) => setOrder(s.map((x) => x.playerId)));
   }, [gameId, order]);
 
+  // Allocating names to a numbered lineup: null = not asked yet, true = allocating.
+  const [allocating, setAllocating] = useState<boolean | null>(null);
+  const history = useRef<number[][]>([]);
+
   function update(next: number[]) {
-    setOrder(next);
-    setLineup(gameId, next);
+    if (allocating) {
+      history.current.push(order ?? []);
+      saveByPosition(next);
+    } else {
+      setOrder(next);
+      setLineup(gameId, next);
+    }
+  }
+  function saveByPosition(next: number[]) {
+    setOrder(next.map((id, i) => (id < 0 ? -(i + 1) : id)));
+    setLineupByPosition(gameId, next);
+  }
+  function undoAllocation() {
+    const prev = history.current.pop();
+    if (prev) saveByPosition(prev);
+  }
+  /** Allocating: a tapped name fills the lowest open number. */
+  function allocate(pid: number) {
+    if (!order) return;
+    const i = order.findIndex((id) => id < 0);
+    if (i < 0) return;
+    const next = [...order];
+    next[i] = pid;
+    update(next);
+  }
+  /** Allocating: tapping a name in the order turns that spot back into "Batter N". */
+  function unallocate(i: number) {
+    if (!order) return;
+    const next = [...order];
+    next[i] = -(i + 1);
+    update(next);
   }
 
   const [q, setQ] = useState('');
@@ -67,16 +100,26 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
   function onHandleDown(e: React.PointerEvent, index: number) {
     e.preventDefault();
     e.stopPropagation();
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    setDrag({ index, startY: e.clientY, dy: 0 });
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {
+      /* capture is best-effort */
+    }
+    dragRef.current = { index, startY: e.clientY, dy: 0 };
+    setDrag(dragRef.current);
   }
   function onHandleMove(e: React.PointerEvent) {
     const d = dragRef.current;
-    if (d) setDrag({ ...d, dy: e.clientY - d.startY });
+    if (!d) return;
+    // Keep the ref current too: a quick flick can release before React re-renders.
+    dragRef.current = { ...d, dy: e.clientY - d.startY };
+    setDrag(dragRef.current);
   }
-  function onHandleUp() {
+  function onHandleUp(e: React.PointerEvent) {
     const d = dragRef.current;
+    dragRef.current = null;
     if (!d || !order) return setDrag(null);
+    d.dy = e.clientY - d.startY;
     const to = targetIndex(d, order.length);
     if (to !== d.index) {
       const next = [...order];
@@ -96,8 +139,10 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
   }
 
   if (!game || !order || !roster) return null;
-  const full = order.length >= MAX;
-  const inProgress = (started ?? 0) > 0;
+  const hasNumbers = order.some((id) => id < 0);
+  const openNumbers = order.filter((id) => id < 0).length;
+  const full = allocating ? openNumbers === 0 : order.length >= MAX;
+  const inProgress = (started ?? 0) > 0 || hasNumbers;
 
   return (
     <div className="page order-page">
@@ -128,23 +173,45 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
           <h2>
             Batting order <span className="muted">({order.length}/{MAX})</span>
           </h2>
-          {order.length > 0 && (
-            <button className="link" onClick={() => update([])}>
-              Clear order
+          {allocating ? (
+            <button className="link" disabled={history.current.length === 0} onClick={undoAllocation}>
+              ↶ Undo
             </button>
+          ) : (
+            order.length > 0 &&
+            !hasNumbers && (
+              <button className="link" onClick={() => update([])}>
+                Clear order
+              </button>
+            )
           )}
         </div>
         {order.length === 0 && <p className="muted hint">Tap names below in the umpire's batting order.</p>}
+        {allocating && (
+          <p className="muted hint">
+            Tap names in batting order; each fills the next number. Drag ≡ to move a name to its right spot; the at-bats in that spot go
+            with it. Tap a name above to turn it back into a number.
+          </p>
+        )}
+        {hasNumbers && allocating === false && (
+          <button className="btn big" onClick={() => setAllocating(true)}>
+            Allocate names to numbers
+          </button>
+        )}
         <ol className="slots">
           {order.map((pid, i) => {
             const p = players.get(pid);
             return (
               <li
                 key={pid}
-                className={'slot' + (drag?.index === i ? ' dragging' : '')}
+                className={'slot' + (drag?.index === i ? ' dragging' : '') + (pid < 0 ? ' numbered' : '')}
                 style={{ transform: `translateY(${shiftFor(i)}px)`, transition: drag?.index === i ? 'none' : undefined }}
               >
-                <button className="slot-main" onClick={() => update(order.filter((x) => x !== pid))}>
+                <button
+                  className="slot-main"
+                  disabled={hasNumbers && !allocating}
+                  onClick={() => (allocating ? pid > 0 && unallocate(i) : update(order.filter((x) => x !== pid)))}
+                >
                   <span className="slot-no">{i + 1}</span>
                   <span className="slot-name">{fullName(p)}</span>
                   {p?.jersey && <span className="jersey">#{p.jersey}</span>}
@@ -155,7 +222,10 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
                   onPointerDown={(e) => onHandleDown(e, i)}
                   onPointerMove={onHandleMove}
                   onPointerUp={onHandleUp}
-                  onPointerCancel={onHandleUp}
+                  onPointerCancel={() => {
+                    dragRef.current = null;
+                    setDrag(null);
+                  }}
                 >
                   ≡
                 </span>
@@ -173,10 +243,15 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
           </button>
         </div>
         <input className="search" type="search" placeholder="Search names" value={q} onChange={(e) => setQ(e.target.value)} />
-        {full && <p className="muted hint">Batting order is full (15).</p>}
+        {full && <p className="muted hint">{allocating ? 'Every number has a name.' : 'Batting order is full (15).'}</p>}
         <div className="roster-grid">
           {available.map((p) => (
-            <button key={p.id} className="roster-btn" disabled={full} onClick={() => update([...order, p.id])}>
+            <button
+              key={p.id}
+              className="roster-btn"
+              disabled={full || (hasNumbers && !allocating)}
+              onClick={() => (allocating ? allocate(p.id) : update([...order, p.id]))}
+            >
               {fullName(p)}
               {p.jersey && <span className="jersey"> #{p.jersey}</span>}
             </button>
@@ -194,6 +269,9 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
         </button>
       </footer>
 
+      {hasNumbers && allocating === null && (
+        <Confirm message="Allocate names to numbers?" onNo={() => nav({ screen: 'chart', gameId })} onYes={() => setAllocating(true)} />
+      )}
       {askNoNames && (
         <Confirm
           message="Are you sure you just want to do the player order without names?"
@@ -220,7 +298,8 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
           onClose={() => setAdding(false)}
           onAdded={(p) => {
             setAdding(false);
-            if (!full) update([...order, p.id]);
+            if (allocating) allocate(p.id);
+            else if (!full) update([...order, p.id]);
           }}
         />
       )}

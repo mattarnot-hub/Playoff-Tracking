@@ -185,7 +185,7 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
           <div className="menu-list">
             {!readOnly && (
               <button className="btn big" onClick={() => nav({ screen: 'order', gameId })}>
-                Edit lineup
+                {slots.some((s) => s.playerId < 0) ? 'Allocate names to numbers' : 'Edit lineup'}
               </button>
             )}
             <button
