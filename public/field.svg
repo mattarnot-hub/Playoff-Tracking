@@ -30,19 +30,6 @@
     <rect x="490" y="833" width="20" height="5" vector-effect="non-scaling-stroke"/>
   </g>
 
-  <!-- Position labels -->
-  <g fill="#767676" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" text-anchor="middle">
-    <text x="215" y="440">LF</text>
-    <text x="390" y="290">LC</text>
-    <text x="610" y="290">RC</text>
-    <text x="785" y="440">RF</text>
-    <text x="430" y="735">SS</text>
-    <text x="570" y="735">2B</text>
-    <text x="360" y="800">3B</text>
-    <text x="640" y="800">1B</text>
-    <text x="500" y="818">P</text>
-    <text x="500" y="994">C</text>
-  </g>
 
   <!-- Optional named zones (invisible; used only to label marks) -->
   <g fill="none" stroke="none">
