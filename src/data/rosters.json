@@ -1,0 +1,638 @@
+[
+ {
+  "id": "beys",
+  "name": "Beys",
+  "players": [
+   {
+    "firstName": "Breadan",
+    "lastName": ""
+   },
+   {
+    "firstName": "James",
+    "lastName": ""
+   },
+   {
+    "firstName": "Cody",
+    "lastName": "Birch"
+   },
+   {
+    "firstName": "Cole",
+    "lastName": "Birch"
+   },
+   {
+    "firstName": "David",
+    "lastName": "Bowen"
+   },
+   {
+    "firstName": "Derek",
+    "lastName": "Bowen"
+   },
+   {
+    "firstName": "Sean",
+    "lastName": "Bowen",
+    "jersey": "29"
+   },
+   {
+    "firstName": "Sean",
+    "lastName": "C"
+   },
+   {
+    "firstName": "Mike",
+    "lastName": "Dal Ferro"
+   },
+   {
+    "firstName": "Jake",
+    "lastName": "DeLaurentis",
+    "jersey": "55"
+   },
+   {
+    "firstName": "David",
+    "lastName": "G"
+   },
+   {
+    "firstName": "Ryan",
+    "lastName": "Goodridge"
+   },
+   {
+    "firstName": "Jamie",
+    "lastName": "Kendra"
+   },
+   {
+    "firstName": "Fiore",
+    "lastName": "Lucente",
+    "jersey": "77"
+   },
+   {
+    "firstName": "Blair",
+    "lastName": "McIntyre",
+    "jersey": "19"
+   },
+   {
+    "firstName": "Justin",
+    "lastName": "Mintsoulis",
+    "jersey": "22"
+   },
+   {
+    "firstName": "Joey",
+    "lastName": "Moncada",
+    "jersey": "11"
+   },
+   {
+    "firstName": "Frank",
+    "lastName": "Papania",
+    "jersey": "12"
+   },
+   {
+    "firstName": "Zach",
+    "lastName": "Rice"
+   },
+   {
+    "firstName": "John",
+    "lastName": "T"
+   },
+   {
+    "firstName": "Adam",
+    "lastName": "Velocci"
+   },
+   {
+    "firstName": "Jeremy",
+    "lastName": "White"
+   },
+   {
+    "firstName": "Timothy",
+    "lastName": "White"
+   }
+  ]
+ },
+ {
+  "id": "black-yakuza",
+  "name": "Black Yakuza",
+  "players": [
+   {
+    "firstName": "Hafeez",
+    "lastName": ""
+   },
+   {
+    "firstName": "Ian",
+    "lastName": ""
+   },
+   {
+    "firstName": "Jan",
+    "lastName": ""
+   },
+   {
+    "firstName": "Jimmy",
+    "lastName": ""
+   },
+   {
+    "firstName": "Johan",
+    "lastName": ""
+   },
+   {
+    "firstName": "Ken",
+    "lastName": ""
+   },
+   {
+    "firstName": "Kenny",
+    "lastName": ""
+   },
+   {
+    "firstName": "Misch",
+    "lastName": ""
+   },
+   {
+    "firstName": "Patrick",
+    "lastName": ""
+   },
+   {
+    "firstName": "Payman",
+    "lastName": ""
+   },
+   {
+    "firstName": "Shajee",
+    "lastName": ""
+   },
+   {
+    "firstName": "Warren",
+    "lastName": ""
+   },
+   {
+    "firstName": "Yan",
+    "lastName": ""
+   },
+   {
+    "firstName": "Jamal",
+    "lastName": "Alykhan"
+   },
+   {
+    "firstName": "Mitchell",
+    "lastName": "Atkinson"
+   },
+   {
+    "firstName": "Joshua",
+    "lastName": "Collins"
+   },
+   {
+    "firstName": "Christian",
+    "lastName": "Diener"
+   },
+   {
+    "firstName": "Thomas",
+    "lastName": "Fearon"
+   },
+   {
+    "firstName": "Ajay",
+    "lastName": "Joshi"
+   },
+   {
+    "firstName": "Chetan",
+    "lastName": "Joshi"
+   },
+   {
+    "firstName": "Sameer",
+    "lastName": "Joshi"
+   },
+   {
+    "firstName": "Shawn",
+    "lastName": "Kanhai"
+   },
+   {
+    "firstName": "Alfie",
+    "lastName": "Khimji"
+   },
+   {
+    "firstName": "Brandon",
+    "lastName": "Kushner"
+   },
+   {
+    "firstName": "Karim",
+    "lastName": "Merali"
+   },
+   {
+    "firstName": "Luke",
+    "lastName": "Panos"
+   },
+   {
+    "firstName": "Alok",
+    "lastName": "Premjee"
+   },
+   {
+    "firstName": "Jason",
+    "lastName": "Seunarine"
+   },
+   {
+    "firstName": "Indy",
+    "lastName": "Singh"
+   },
+   {
+    "firstName": "Nitin",
+    "lastName": "Sunak"
+   },
+   {
+    "firstName": "Sat",
+    "lastName": "Suri"
+   },
+   {
+    "firstName": "Kareem",
+    "lastName": "Thawer"
+   },
+   {
+    "firstName": "Bryan",
+    "lastName": "Todes"
+   },
+   {
+    "firstName": "Rick",
+    "lastName": "Todes"
+   }
+  ]
+ },
+ {
+  "id": "bullets",
+  "name": "Bullets",
+  "players": [
+   {
+    "firstName": "Ricky",
+    "lastName": ""
+   },
+   {
+    "firstName": "Shaan",
+    "lastName": "Athwal"
+   },
+   {
+    "firstName": "Sonny",
+    "lastName": "Athwal"
+   },
+   {
+    "firstName": "Charles",
+    "lastName": "Black"
+   },
+   {
+    "firstName": "Tim",
+    "lastName": "Calaiezzi"
+   },
+   {
+    "firstName": "Jordan",
+    "lastName": "Cassel"
+   },
+   {
+    "firstName": "Jon",
+    "lastName": "Celis"
+   },
+   {
+    "firstName": "Matthew",
+    "lastName": "Davis"
+   },
+   {
+    "firstName": "Josh",
+    "lastName": "Dyan"
+   },
+   {
+    "firstName": "Randy",
+    "lastName": "Gajadhar"
+   },
+   {
+    "firstName": "Jesse",
+    "lastName": "Gilbert"
+   },
+   {
+    "firstName": "Alex",
+    "lastName": "Gymnopoulos"
+   },
+   {
+    "firstName": "Adam",
+    "lastName": "Hand"
+   },
+   {
+    "firstName": "Tom",
+    "lastName": "Krklinski"
+   },
+   {
+    "firstName": "Robin",
+    "lastName": "Lesch",
+    "jersey": "0"
+   },
+   {
+    "firstName": "Greg",
+    "lastName": "Marchiori"
+   },
+   {
+    "firstName": "Eric",
+    "lastName": "Moskowski"
+   },
+   {
+    "firstName": "Jason",
+    "lastName": "Nippard"
+   },
+   {
+    "firstName": "Chris",
+    "lastName": "Nunes"
+   },
+   {
+    "firstName": "Anthony",
+    "lastName": "Paskaris"
+   },
+   {
+    "firstName": "Johnny",
+    "lastName": "Paskaris"
+   },
+   {
+    "firstName": "Chris",
+    "lastName": "Risteski"
+   },
+   {
+    "firstName": "Sean",
+    "lastName": "Samuel"
+   },
+   {
+    "firstName": "Nigel",
+    "lastName": "Savage"
+   },
+   {
+    "firstName": "Steve",
+    "lastName": "Sekulovski"
+   },
+   {
+    "firstName": "Oren",
+    "lastName": "Shapiro"
+   },
+   {
+    "firstName": "Justin",
+    "lastName": "Siebler"
+   },
+   {
+    "firstName": "Randy",
+    "lastName": "Singh"
+   },
+   {
+    "firstName": "Ryan",
+    "lastName": "Smith",
+    "jersey": "12"
+   },
+   {
+    "firstName": "Matt",
+    "lastName": "Sousa"
+   },
+   {
+    "firstName": "Jesse",
+    "lastName": "Tang"
+   },
+   {
+    "firstName": "Jacob",
+    "lastName": "Tiangco"
+   },
+   {
+    "firstName": "Zak",
+    "lastName": "Usher"
+   },
+   {
+    "firstName": "Ryan",
+    "lastName": "Vejin"
+   },
+   {
+    "firstName": "Justin",
+    "lastName": "Wong"
+   }
+  ]
+ },
+ {
+  "id": "lumber-jacks",
+  "name": "Lumber Jacks",
+  "players": [
+   {
+    "firstName": "Anthony",
+    "lastName": ""
+   },
+   {
+    "firstName": "David",
+    "lastName": ""
+   },
+   {
+    "firstName": "Kurt",
+    "lastName": ""
+   },
+   {
+    "firstName": "Kyle",
+    "lastName": ""
+   },
+   {
+    "firstName": "Sasha",
+    "lastName": ""
+   },
+   {
+    "firstName": "Shannon",
+    "lastName": ""
+   },
+   {
+    "firstName": "Tony",
+    "lastName": ""
+   },
+   {
+    "firstName": "Will",
+    "lastName": ""
+   },
+   {
+    "firstName": "Dave",
+    "lastName": "Campbell",
+    "jersey": "77"
+   },
+   {
+    "firstName": "Travis",
+    "lastName": "Chan"
+   },
+   {
+    "firstName": "Chris",
+    "lastName": "Cole",
+    "jersey": "44"
+   },
+   {
+    "firstName": "Dave",
+    "lastName": "Cutler",
+    "jersey": "72"
+   },
+   {
+    "firstName": "Michael",
+    "lastName": "Cutler",
+    "jersey": "5"
+   },
+   {
+    "firstName": "Andrew",
+    "lastName": "Dalrymple"
+   },
+   {
+    "firstName": "Ryan",
+    "lastName": "Dias"
+   },
+   {
+    "firstName": "Pat",
+    "lastName": "Donovan"
+   },
+   {
+    "firstName": "Matt",
+    "lastName": "Dunlop",
+    "jersey": "22"
+   },
+   {
+    "firstName": "Aldi",
+    "lastName": "Dzilums",
+    "jersey": "8"
+   },
+   {
+    "firstName": "Jesse",
+    "lastName": "Faubert",
+    "jersey": "21"
+   },
+   {
+    "firstName": "Brandon",
+    "lastName": "Fitzgibbon"
+   },
+   {
+    "firstName": "Andrew",
+    "lastName": "Hobbs"
+   },
+   {
+    "firstName": "Jordan",
+    "lastName": "Hoover",
+    "jersey": "24"
+   },
+   {
+    "firstName": "Scott",
+    "lastName": "Jackson"
+   },
+   {
+    "firstName": "William",
+    "lastName": "Jeyaveeran"
+   },
+   {
+    "firstName": "Kris",
+    "lastName": "Lee"
+   },
+   {
+    "firstName": "Pat",
+    "lastName": "McClure"
+   },
+   {
+    "firstName": "AJ",
+    "lastName": "Regan",
+    "jersey": "12"
+   },
+   {
+    "firstName": "Jeremy",
+    "lastName": "Sager",
+    "jersey": "28"
+   },
+   {
+    "firstName": "Joe",
+    "lastName": "Sanzo",
+    "jersey": "38"
+   },
+   {
+    "firstName": "Craig",
+    "lastName": "Schultz"
+   },
+   {
+    "firstName": "Justin",
+    "lastName": "Senior",
+    "jersey": "17"
+   },
+   {
+    "firstName": "Ryan",
+    "lastName": "Susko"
+   },
+   {
+    "firstName": "Michael",
+    "lastName": "Vella"
+   },
+   {
+    "firstName": "Joey",
+    "lastName": "Walsh",
+    "jersey": "89"
+   },
+   {
+    "firstName": "Andrew",
+    "lastName": "Wolfe"
+   },
+   {
+    "firstName": "Mike",
+    "lastName": "Woodman"
+   }
+  ]
+ },
+ {
+  "id": "markham-mavericks",
+  "name": "Markham Mavericks",
+  "players": [
+   {
+    "firstName": "Oliver",
+    "lastName": "Bennett"
+   },
+   {
+    "firstName": "Ashley",
+    "lastName": "Bernatt"
+   },
+   {
+    "firstName": "Brian",
+    "lastName": "Chio"
+   },
+   {
+    "firstName": "Herman",
+    "lastName": "Ho"
+   },
+   {
+    "firstName": "Jason",
+    "lastName": "Ladha"
+   },
+   {
+    "firstName": "Avery",
+    "lastName": "McIntee-Seith"
+   },
+   {
+    "firstName": "John",
+    "lastName": "Pagliocca"
+   },
+   {
+    "firstName": "Jordan",
+    "lastName": "Parsons"
+   },
+   {
+    "firstName": "Cydney",
+    "lastName": "Reyes"
+   },
+   {
+    "firstName": "Jimmy",
+    "lastName": "Rice"
+   },
+   {
+    "firstName": "Fred",
+    "lastName": "Rinella"
+   },
+   {
+    "firstName": "Kyle",
+    "lastName": "Rogers"
+   },
+   {
+    "firstName": "Arun",
+    "lastName": "Shan"
+   },
+   {
+    "firstName": "Courtney",
+    "lastName": "Smith"
+   },
+   {
+    "firstName": "Orcun",
+    "lastName": "Unsal"
+   },
+   {
+    "firstName": "Suhayl",
+    "lastName": "Unsal"
+   },
+   {
+    "firstName": "Luke",
+    "lastName": "Wong"
+   },
+   {
+    "firstName": "Anthony",
+    "lastName": "Yin"
+   }
+  ]
+ }
+]

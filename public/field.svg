@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <!--
+    Cito Gaston's spray chart field map.
+    Rules for replacements: keep viewBox="0 0 1000 1000" and home plate at (500, 950).
+    Optional zone paths (ids zone-*) are used only to label marks; they are invisible.
+  -->
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <!-- Fair territory grass -->
+  <path d="M500,950 L47,497 A454,454 0 0 1 953,497 Z" fill="#eef3ea"/>
+
+  <!-- Infield dirt and home circle -->
+  <path d="M500,950 L353.4,803.4 A150,150 0 0 1 646.6,803.4 Z" fill="#f3ebdc"/>
+  <circle cx="500" cy="950" r="34" fill="#f3ebdc"/>
+
+  <!-- Fence and foul lines -->
+  <g fill="none" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke">
+    <path d="M47,497 A454,454 0 0 1 953,497" vector-effect="non-scaling-stroke"/>
+    <path d="M500,950 L47,497 M500,950 L953,497" vector-effect="non-scaling-stroke"/>
+    <path d="M353.4,803.4 A150,150 0 0 1 646.6,803.4" vector-effect="non-scaling-stroke"/>
+    <path d="M605,845 L500,740 L395,845" vector-effect="non-scaling-stroke"/>
+  </g>
+
+  <!-- Bases, plate, rubber -->
+  <g fill="#fff" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke">
+    <rect x="596" y="836" width="18" height="18" transform="rotate(45 605 845)" vector-effect="non-scaling-stroke"/>
+    <rect x="491" y="731" width="18" height="18" transform="rotate(45 500 740)" vector-effect="non-scaling-stroke"/>
+    <rect x="386" y="836" width="18" height="18" transform="rotate(45 395 845)" vector-effect="non-scaling-stroke"/>
+    <path d="M490,942 L510,942 L510,952 L500,960 L490,952 Z" vector-effect="non-scaling-stroke"/>
+    <rect x="490" y="833" width="20" height="5" vector-effect="non-scaling-stroke"/>
+  </g>
+
+  <!-- Position labels -->
+  <g fill="#767676" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" text-anchor="middle">
+    <text x="215" y="440">LF</text>
+    <text x="390" y="290">LC</text>
+    <text x="610" y="290">RC</text>
+    <text x="785" y="440">RF</text>
+    <text x="430" y="735">SS</text>
+    <text x="570" y="735">2B</text>
+    <text x="360" y="800">3B</text>
+    <text x="640" y="800">1B</text>
+    <text x="500" y="818">P</text>
+    <text x="500" y="994">C</text>
+  </g>
+
+  <!-- Optional named zones (invisible; used only to label marks) -->
+  <g fill="none" stroke="none">
+    <path id="zone-foul-left" d="M500,950 L0,450 L0,1000 L500,1000 Z"/>
+    <path id="zone-foul-right" d="M500,950 L1000,450 L1000,1000 L500,1000 Z"/>
+    <path id="zone-over-fence" d="M47,497 A454,454 0 0 1 953,497 L1000,450 L1000,0 L0,0 L0,450 Z"/>
+    <path id="zone-left" d="M500,950 L47,497 A454,454 0 0 1 279.5,126.9 Z"/>
+    <path id="zone-center" d="M500,950 L279.5,126.9 A454,454 0 0 1 720.5,126.9 Z"/>
+    <path id="zone-right" d="M500,950 L720.5,126.9 A454,454 0 0 1 953,497 Z"/>
+  </g>
+</svg>
