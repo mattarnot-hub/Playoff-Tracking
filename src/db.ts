@@ -104,6 +104,17 @@ export function shortName(p?: Player) {
   return p.lastName ? `${p.firstName[0]}. ${p.lastName}` : p.firstName;
 }
 
+/** A lineup started "without names" uses placeholder batters with negative ids: -3 is "Batter 3". */
+export function numberedPlayer(id: number, teamId: string): Player {
+  return { id, teamId, firstName: `Batter ${-id}`, lastName: '' };
+}
+
+/** Add placeholder batters for any negative ids so lookups by id always find a name. */
+export function withNumbered(players: Map<number, Player>, ids: number[], teamId: string) {
+  for (const id of ids) if (id < 0 && !players.has(id)) players.set(id, numberedPlayer(id, teamId));
+  return players;
+}
+
 /** Sort key: last name, or first name for first-name-only players. */
 export function sortKey(p: Player) {
   return `${(p.lastName || p.firstName).toLowerCase()} ${p.firstName.toLowerCase()}`;

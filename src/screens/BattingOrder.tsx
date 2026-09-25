@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, fullName, OUR_TEAM, setLineup, sortKey, type Player } from '../db';
+import { db, fullName, OUR_TEAM, setLineup, sortKey, withNumbered, type Player } from '../db';
 import type { Nav } from '../App';
 import PhotoViewer from '../components/PhotoViewer';
-import Sheet from '../components/Sheet';
+import Sheet, { Confirm } from '../components/Sheet';
 import Logo from '../components/Logo';
 
 const MAX = 15;
@@ -33,8 +33,13 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
   const [q, setQ] = useState('');
   const [adding, setAdding] = useState(false);
   const [viewPhoto, setViewPhoto] = useState(false);
+  const [askNoNames, setAskNoNames] = useState(false);
+  const [batterCount, setBatterCount] = useState(10);
 
-  const players = useMemo(() => new Map((roster ?? []).map((p) => [p.id, p])), [roster]);
+  const players = useMemo(
+    () => withNumbered(new Map((roster ?? []).map((p) => [p.id, p])), order ?? [], game?.teamId ?? ''),
+    [roster, order, game?.teamId],
+  );
   const available = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return (roster ?? [])
@@ -181,11 +186,33 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
       </section>
 
       <footer className="bottom-bar">
-        <button className="btn primary big" disabled={order.length === 0} onClick={() => nav({ screen: 'chart', gameId })}>
+        <button
+          className="btn primary big"
+          onClick={() => (order.length === 0 ? setAskNoNames(true) : nav({ screen: 'chart', gameId }))}
+        >
           {inProgress ? 'Back to chart' : 'Start game'}
         </button>
       </footer>
 
+      {askNoNames && (
+        <Confirm
+          message="Are you sure you just want to do the player order without names?"
+          onNo={() => setAskNoNames(false)}
+          onYes={async () => {
+            await setLineup(gameId, Array.from({ length: batterCount }, (_, i) => -(i + 1)));
+            nav({ screen: 'chart', gameId });
+          }}
+        >
+          <div className="stepper-row">
+            <span>Batters in their lineup</span>
+            <span className="stepper">
+              <button onClick={() => setBatterCount((c) => Math.max(1, c - 1))}>−</button>
+              <span className="val">{batterCount}</span>
+              <button onClick={() => setBatterCount((c) => Math.min(MAX, c + 1))}>+</button>
+            </span>
+          </div>
+        </Confirm>
+      )}
       {viewPhoto && photoUrl && <PhotoViewer src={photoUrl} onClose={() => setViewPhoto(false)} />}
       {adding && (
         <AddPlayer

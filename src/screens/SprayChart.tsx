@@ -352,7 +352,7 @@ function DueUp({ g, open, setOpen, readOnly }: { g: GameData; open: boolean; set
                 </td>
                 <td>
                   {readOnly || n === 0 ? (
-                    `${r.leadoff} · ${players.get(slots.find((s) => s.order === r.leadoff)?.playerId ?? -1)?.lastName ?? ''}`
+                    `${r.leadoff} · ${shortName(players.get(slots.find((s) => s.order === r.leadoff)?.playerId ?? 0))}`
                   ) : (
                     <select
                       className={r.leadoffOverridden ? 'overridden' : ''}
@@ -463,7 +463,7 @@ function PrintSheet({ g, opp, marks }: { g: GameData; opp: string; marks: FieldM
                   <td>{r.inning}</td>
                   <td>{r.count}</td>
                   <td>
-                    {r.leadoff} · {shortName(players.get(slots.find((s) => s.order === r.leadoff)?.playerId ?? -1))}
+                    {r.leadoff} · {shortName(players.get(slots.find((s) => s.order === r.leadoff)?.playerId ?? 0))}
                   </td>
                 </tr>
               ))}

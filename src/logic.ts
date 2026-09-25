@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, type AtBat, type Game, type InningOverride, type LineupSlot, type Player, type Result } from './db';
+import { db, withNumbered, type AtBat, type Game, type InningOverride, type LineupSlot, type Player, type Result } from './db';
 
 /** Wrap a 1-based batting order position around a lineup of n batters. */
 export function wrap(order: number, n: number) {
@@ -58,7 +58,11 @@ export function useGameData(gameId: number | undefined): GameData | undefined | 
       db.inningOverrides.where('gameId').equals(gameId).toArray(),
       db.players.where('teamId').equals(game.teamId).toArray(),
     ]);
-    const players = new Map(roster.map((p) => [p.id, p]));
+    const players = withNumbered(
+      new Map(roster.map((p) => [p.id, p])),
+      [...slots.map((s) => s.playerId), ...atBats.map((a) => a.playerId)],
+      game.teamId,
+    );
     const n = slots.length;
     const { rows, up } = computeInnings(n, game.inning, atBats, overrides);
     return { game, slots, players, atBats, overrides, rows, up, n };
