@@ -1,17 +1,84 @@
 :root {
-  --ink: #111;
-  --muted: #666;
-  --line: #d4d4d4;
-  --bg: #fff;
-  --panel: #f5f5f3;
-  --brand: #0b3d91;
+  /* Light: soft green tint (grass), dark ink for sunlight */
+  --bg: #e8f0e4;
+  --surface: #f5f9f2;
+  --panel: #dbe7d5;
+  --ink: #102010;
+  --muted: #566852;
+  --line: #bfd0b8;
+  --line-soft: #d3e0cd;
+  --brand: #1b4f91;
   --brand-ink: #fff;
-  --up: #fff4c2;
-  --hl: #d9480f;
+  --up: #fff0b3;
+  --hl: #c2410c;
   --danger: #b42318;
+  --mark-ink: #000;
+  --shadow: rgba(0, 0, 0, 0.25);
+  --backdrop: rgba(0, 0, 0, 0.35);
+  --bar-bg: rgba(232, 240, 228, 0.96);
+  --ring-track: rgba(255, 255, 255, 0.4);
+  --ring-line: rgba(0, 0, 0, 0.18);
+  --grass: #d6e7cd;
+  --dirt: #efe3cc;
+  --field-line: #1d2b1d;
+  --base-fill: #fff;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  color-scheme: light; /* high contrast in sunlight; no dark mode on purpose */
+  color-scheme: light;
+}
+
+/* Dark: follows the phone unless the coach picks Light/Dark in Settings */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+  --bg: #0e1511;
+  --surface: #17211a;
+  --panel: #1f2c23;
+  --ink: #e6eee3;
+  --muted: #98aa94;
+  --line: #34463a;
+  --line-soft: #243129;
+  --brand: #3d74c7;
+  --brand-ink: #fff;
+  --up: #4a3f10;
+  --hl: #ff8f50;
+  --danger: #ff6b5e;
+  --mark-ink: #f4f7f2;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --backdrop: rgba(0, 0, 0, 0.55);
+  --bar-bg: rgba(14, 21, 17, 0.96);
+  --ring-track: rgba(0, 0, 0, 0.35);
+  --ring-line: rgba(255, 255, 255, 0.25);
+  --grass: #1c3524;
+  --dirt: #3b3125;
+  --field-line: #c8d6c2;
+  --base-fill: #e6eee3;
+  color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0e1511;
+  --surface: #17211a;
+  --panel: #1f2c23;
+  --ink: #e6eee3;
+  --muted: #98aa94;
+  --line: #34463a;
+  --line-soft: #243129;
+  --brand: #3d74c7;
+  --brand-ink: #fff;
+  --up: #4a3f10;
+  --hl: #ff8f50;
+  --danger: #ff6b5e;
+  --mark-ink: #f4f7f2;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --backdrop: rgba(0, 0, 0, 0.55);
+  --bar-bg: rgba(14, 21, 17, 0.96);
+  --ring-track: rgba(0, 0, 0, 0.35);
+  --ring-line: rgba(255, 255, 255, 0.25);
+  --grass: #1c3524;
+  --dirt: #3b3125;
+  --field-line: #c8d6c2;
+  --base-fill: #e6eee3;
+  color-scheme: dark;
 }
 
 * {
@@ -115,7 +182,7 @@ h2 {
   padding: 0 16px;
   border: 2px solid var(--ink);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   font-weight: 600;
 }
 .btn:disabled {
@@ -168,14 +235,14 @@ input[type='search'],
   padding: 0 12px;
   border: 2px solid var(--line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   font-size: 18px;
   color: var(--ink);
   -webkit-appearance: none;
   appearance: none;
 }
 select {
-  background-image: linear-gradient(45deg, transparent 50%, #333 50%), linear-gradient(135deg, #333 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
   background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%;
   background-size: 6px 6px;
   background-repeat: no-repeat;
@@ -247,7 +314,7 @@ select {
   overflow: hidden;
   width: 64px;
   height: 48px;
-  background: #eee;
+  background: var(--panel);
 }
 .thumb img {
   width: 100%;
@@ -277,8 +344,8 @@ select {
 }
 .slot.dragging {
   z-index: 2;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  background: #fff;
+  box-shadow: 0 6px 18px var(--shadow);
+  background: var(--surface);
 }
 .slot-main {
   flex: 1;
@@ -297,7 +364,7 @@ select {
   height: 28px;
   border-radius: 50%;
   background: var(--brand);
-  color: #fff;
+  color: var(--brand-ink);
   display: grid;
   place-items: center;
   font-size: 15px;
@@ -331,7 +398,7 @@ select {
   padding: 6px 10px;
   border: 2px solid var(--ink);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   font-size: 17px;
   font-weight: 600;
   text-align: left;
@@ -345,7 +412,7 @@ select {
   right: 0;
   bottom: 0;
   padding: 12px 16px calc(var(--safe-bottom) + 12px);
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--bar-bg);
   border-top: 1px solid var(--line);
 }
 .bottom-bar .btn {
@@ -387,7 +454,7 @@ select {
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--backdrop);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -397,7 +464,7 @@ select {
   max-width: 560px;
   max-height: 85dvh;
   overflow: auto;
-  background: #fff;
+  background: var(--surface);
   border-radius: 18px 18px 0 0;
   padding: 8px 16px calc(var(--safe-bottom) + 16px);
 }
@@ -434,7 +501,7 @@ select {
   height: 56px;
   border-radius: 12px;
   border: 2px solid var(--ink);
-  background: #fff;
+  background: var(--surface);
   font-size: 26px;
   font-weight: 700;
 }
@@ -496,7 +563,7 @@ select {
   background: none;
   text-align: left;
   font-size: 13px;
-  color: #333;
+  color: var(--ink);
   padding: 6px 4px;
   min-height: 36px;
   white-space: nowrap;
@@ -550,13 +617,13 @@ select {
   padding: 0 14px;
   border-radius: 17px;
   border: 1.5px solid var(--ink);
-  background: #fff;
+  background: var(--surface);
   font-size: 14px;
   font-weight: 600;
 }
 .chip.on {
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
 }
 
 .field-wrap {
@@ -570,6 +637,20 @@ select {
 .field-wrap.moving {
   outline: 3px dashed var(--hl);
   outline-offset: -3px;
+}
+/* Theme the standard field.svg palette (grass #eef3ea, dirt #f3ebdc, black lines).
+   Other colours in a replacement drawing are left as drawn; the printed sheet uses the file as-is. */
+.field-svg [fill='#eef3ea'] {
+  fill: var(--grass);
+}
+.field-svg [fill='#f3ebdc'] {
+  fill: var(--dirt);
+}
+.field-svg [stroke='#000'] {
+  stroke: var(--field-line);
+}
+.field-svg [fill='#fff'] {
+  fill: var(--base-fill);
 }
 .field-svg,
 .field-svg svg,
@@ -585,7 +666,7 @@ select {
 
 .field-caption {
   font-size: 26px;
-  fill: #555;
+  fill: var(--muted);
   font-weight: 600;
 }
 .mark {
@@ -598,16 +679,16 @@ select {
   fill: transparent;
 }
 .mark-circle {
-  fill: #fff;
-  stroke: #000;
+  fill: var(--surface);
+  stroke: var(--mark-ink);
   stroke-width: 4;
 }
 .mark-text {
   font-size: 40px;
   font-weight: 800;
-  fill: #000;
+  fill: var(--mark-ink);
   paint-order: stroke;
-  stroke: #fff;
+  stroke: var(--bg);
   stroke-width: 8px;
   stroke-linejoin: round;
 }
@@ -650,8 +731,8 @@ select {
 }
 
 .hold-track {
-  fill: rgba(255, 255, 255, 0.35);
-  stroke: rgba(0, 0, 0, 0.18);
+  fill: var(--ring-track);
+  stroke: var(--ring-line);
   stroke-width: 16;
 }
 .hold-progress {
@@ -702,7 +783,7 @@ select {
   width: 100%;
   min-height: 44px;
   border: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--line-soft);
   background: none;
   padding: 0 6px;
   text-align: left;
@@ -770,7 +851,7 @@ select {
 .dueup td {
   padding: 6px 8px;
   text-align: left;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--line-soft);
 }
 .dueup tr.current {
   background: var(--up);
@@ -822,12 +903,12 @@ select {
   min-height: 48px;
   border: 2px solid var(--ink);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   font-weight: 700;
 }
 .seg-btn.on {
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
 }
 .row-btns {
   display: flex;
@@ -879,6 +960,11 @@ select {
     visibility: visible;
   }
   .print-sheet {
+    /* paper is always black on white, whatever the screen theme */
+    --mark-ink: #000;
+    --surface: #fff;
+    --bg: #fff;
+    --muted: #444;
     display: block;
     position: absolute;
     inset: 0;

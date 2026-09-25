@@ -4,7 +4,7 @@
     Rules for replacements: keep viewBox="0 0 1000 1000" and home plate at (500, 950).
     Optional zone paths (ids zone-*) are used only to label marks; they are invisible.
   -->
-  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+  <rect x="0" y="0" width="1000" height="1000" fill="none"/>
 
   <!-- Fair territory grass -->
   <path d="M500,950 L47,497 A454,454 0 0 1 953,497 Z" fill="#eef3ea"/>

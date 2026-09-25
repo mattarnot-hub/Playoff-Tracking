@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db, exportAll, importAll, sortKey, todayIso, type Player } from '../db';
 import type { Nav } from '../App';
 import { AddPlayer } from './BattingOrder';
+import { getTheme, setTheme, type ThemeChoice } from '../theme';
 import Logo from '../components/Logo';
 
 const HOLD_KEY = 'spray.holdMs';
@@ -20,6 +21,7 @@ export function getHoldMs() {
 
 export default function Settings({ nav }: { nav: Nav }) {
   const [hold, setHold] = useState(getHoldMs);
+  const [theme, setThemeState] = useState(getTheme);
   const [msg, setMsg] = useState('');
 
   function pickHold(v: number) {
@@ -66,6 +68,25 @@ export default function Settings({ nav }: { nav: Nav }) {
         </button>
         <h1 className="title small">Settings</h1>
       </header>
+
+      <section className="settings-section">
+        <h2>Appearance</h2>
+        <p className="muted">Auto follows the iPhone's light / dark setting.</p>
+        <div className="seg">
+          {(['auto', 'light', 'dark'] as ThemeChoice[]).map((v) => (
+            <button
+              key={v}
+              className={'seg-btn' + (theme === v ? ' on' : '')}
+              onClick={() => {
+                setThemeState(v);
+                setTheme(v);
+              }}
+            >
+              {v[0].toUpperCase() + v.slice(1)}
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="settings-section">
         <h2>Hit hold time</h2>
