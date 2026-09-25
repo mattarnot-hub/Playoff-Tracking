@@ -1,7 +1,23 @@
 import type { ReactNode } from 'react';
 
 /** Centered yes/no popup. Used only outside live play (the chart itself never confirms). */
-export function Confirm({ message, children, onYes, onNo }: { message: string; children?: ReactNode; onYes: () => void; onNo: () => void }) {
+export function Confirm({
+  message,
+  children,
+  onYes,
+  onNo,
+  yesLabel = 'Yes',
+  noLabel = 'No',
+  danger,
+}: {
+  message: string;
+  children?: ReactNode;
+  onYes: () => void;
+  onNo: () => void;
+  yesLabel?: string;
+  noLabel?: string;
+  danger?: boolean;
+}) {
   return (
     <div className="sheet-backdrop center" onClick={onNo}>
       <div className="dialog" onClick={(e) => e.stopPropagation()} role="alertdialog" aria-label={message}>
@@ -9,10 +25,10 @@ export function Confirm({ message, children, onYes, onNo }: { message: string; c
         {children}
         <div className="dialog-btns">
           <button className="btn big" onClick={onNo}>
-            No
+            {noLabel}
           </button>
-          <button className="btn big primary" onClick={onYes}>
-            Yes
+          <button className={'btn big ' + (danger ? 'danger-fill' : 'primary')} onClick={onYes}>
+            {yesLabel}
           </button>
         </div>
       </div>

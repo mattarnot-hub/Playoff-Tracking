@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db, FIELDS, fmtDate, OUR_TEAM, todayIso } from '../db';
 import type { Nav } from '../App';
 import Logo from '../components/Logo';
+import DeleteGame from '../components/DeleteGame';
 
 export default function Setup({ nav }: { nav: Nav }) {
   const teams = useLiveQuery(() => db.teams.orderBy('name').toArray(), []) ?? [];
@@ -17,6 +18,7 @@ export default function Setup({ nav }: { nav: Nav }) {
   const [teamId, setTeamId] = useState('');
   const [date, setDate] = useState(todayIso());
   const [field, setField] = useState('');
+  const [deleting, setDeleting] = useState<{ id: number; label: string } | null>(null);
 
   const teamName = (id: string) => teams.find((t) => t.id === id)?.name ?? '';
   const live = games.find((g) => g.status === 'live');
@@ -103,13 +105,25 @@ export default function Setup({ nav }: { nav: Nav }) {
       {past.length > 0 && (
         <section className="past">
           <h2>Past games</h2>
-          {past.map((g) => (
-            <button key={g.id} className="past-row" onClick={() => nav({ screen: 'chart', gameId: g.id })}>
-              {fmtDate(g.date)} · vs. {teamName(g.teamId)} · {g.ourScore}–{g.theirScore}
-              <span aria-hidden>›</span>
-            </button>
-          ))}
+          {past.map((g) => {
+            const label = `${fmtDate(g.date)} · vs. ${teamName(g.teamId)} · ${g.ourScore}–${g.theirScore}`;
+            return (
+              <div key={g.id} className="past-item">
+                <button className="past-row" onClick={() => nav({ screen: 'chart', gameId: g.id })}>
+                  {label}
+                  <span aria-hidden>›</span>
+                </button>
+                <button className="icon-btn trash" aria-label={`Delete ${label}`} onClick={() => setDeleting({ id: g.id, label })}>
+                  🗑
+                </button>
+              </div>
+            );
+          })}
         </section>
+      )}
+
+      {deleting && (
+        <DeleteGame gameId={deleting.id} label={deleting.label} onClose={() => setDeleting(null)} onDeleted={() => setDeleting(null)} />
       )}
     </div>
   );

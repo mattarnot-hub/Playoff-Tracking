@@ -7,6 +7,7 @@ import Field, { MarksLayer, zoneOf, type FieldMark } from '../components/Field';
 import Sheet from '../components/Sheet';
 import { getHoldMs } from './Settings';
 import Logo from '../components/Logo';
+import DeleteGame from '../components/DeleteGame';
 
 type Filter = { kind: 'all' } | { kind: 'up' } | { kind: 'next3' } | { kind: 'player'; playerId: number };
 type Panel = null | 'status' | 'menu' | { mark: number } | { assign: number };
@@ -22,6 +23,7 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
   const [dueOpen, setDueOpen] = useState(false);
   const [flashId, setFlashId] = useState<number | null>(null);
   const [leadoffFlash, setLeadoffFlash] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const holdMs = useMemo(getHoldMs, []);
 
   useEffect(() => {
@@ -189,6 +191,15 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
 
       <PrintSheet g={g} opp={opp} marks={marks.map((m) => ({ ...m, frozen: false }))} />
 
+      {deleting && (
+        <DeleteGame
+          gameId={gameId}
+          label={`${fmtDate(game.date)} · vs. ${opp} · ${game.ourScore}–${game.theirScore}`}
+          onClose={() => setDeleting(false)}
+          onDeleted={() => nav({ screen: 'setup' })}
+        />
+      )}
+
       {panel === 'status' && <StatusSheet g={g} opp={opp} onClose={() => setPanel(null)} />}
 
       {panel === 'menu' && (
@@ -209,9 +220,20 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
               Export PDF / Print
             </button>
             {readOnly ? (
-              <button className="btn big" onClick={() => db.games.update(gameId, { status: 'live' }).then(() => setPanel(null))}>
-                Reopen game for editing
-              </button>
+              <>
+                <button className="btn big" onClick={() => db.games.update(gameId, { status: 'live' }).then(() => setPanel(null))}>
+                  Reopen game for editing
+                </button>
+                <button
+                  className="btn big danger"
+                  onClick={() => {
+                    setPanel(null);
+                    setDeleting(true);
+                  }}
+                >
+                  Delete game
+                </button>
+              </>
             ) : (
               <button className="btn big" onClick={() => db.games.update(gameId, { status: 'final' }).then(() => nav({ screen: 'setup' }))}>
                 End game (final)

@@ -157,6 +157,15 @@ export async function setLineupByPosition(gameId: number, ids: number[]) {
   return norm;
 }
 
+export async function deleteGame(gameId: number) {
+  await db.transaction('rw', [db.games, db.lineupSlots, db.atBats, db.inningOverrides] as Table[], async () => {
+    await db.games.delete(gameId);
+    await db.lineupSlots.where('gameId').equals(gameId).delete();
+    await db.atBats.where('gameId').equals(gameId).delete();
+    await db.inningOverrides.where('gameId').equals(gameId).delete();
+  });
+}
+
 /* ---------- backup ---------- */
 
 function blobToDataUrl(b: Blob): Promise<string> {
