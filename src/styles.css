@@ -705,8 +705,33 @@ select {
 .mark {
   transition: opacity 0.2s;
 }
+.mark.frozen {
+  opacity: 0.5;
+}
+.mark.frozen,
+.mark.frozen * {
+  pointer-events: none; /* ended innings are locked; presses go through to the field */
+}
+.mark.frozen .mark-text {
+  fill: var(--muted);
+}
+.mark.frozen .mark-circle {
+  stroke: var(--muted);
+}
 .mark.dim {
   opacity: 0.15;
+}
+.mark.hl {
+  opacity: 1;
+}
+.mark-inn {
+  font-size: 24px;
+  font-weight: 700;
+  fill: var(--muted);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 6px;
+  stroke-linejoin: round;
 }
 .mark-target {
   fill: transparent;

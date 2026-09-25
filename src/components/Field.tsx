@@ -10,6 +10,9 @@ export interface FieldMark {
   hit: boolean;
   x: number; // 0–1
   y: number; // 0–1
+  inning: number;
+  /** From an inning that has ended: greyed, drawn underneath, and not editable. */
+  frozen?: boolean;
 }
 
 /* ---------- field.svg loading (one file, swappable without code changes) ---------- */
@@ -82,8 +85,10 @@ export function MarksLayer({
           {caption}
         </text>
       )}
-      {marks.map((m) => {
+      {/* earlier innings first, so the current inning is drawn on top */}
+      {[...marks].sort((a, b) => Number(!!b.frozen) - Number(!!a.frozen)).map((m) => {
         const cls = ['mark', m.hit ? 'hit' : 'out'];
+        if (m.frozen) cls.push('frozen');
         if (dimmed?.(m)) cls.push('dim');
         if (highlighted?.(m)) cls.push('hl');
         if (m.id === flashId) cls.push('flash');
@@ -94,6 +99,9 @@ export function MarksLayer({
               {m.hit && <circle r="30" className="mark-circle" />}
               <text dy="0.36em" textAnchor="middle" className="mark-text">
                 {m.order}
+              </text>
+              <text x="34" y="-20" className="mark-inn">
+                Inn {m.inning}
               </text>
             </g>
           </g>

@@ -56,7 +56,18 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
   const byId = new Map(atBats.map((a) => [a.id, a]));
   const marks: FieldMark[] = atBats
     .filter((a) => a.result !== 'K' && a.x != null && a.y != null)
-    .map((a) => ({ id: a.id, order: a.order, hit: a.result === 'HIT', x: a.x!, y: a.y! }));
+    .map((a) => ({
+      id: a.id,
+      order: a.order,
+      hit: a.result === 'HIT',
+      x: a.x!,
+      y: a.y!,
+      inning: a.inning,
+      frozen: !readOnly && a.inning < game.inning,
+    }));
+  // Undo never reaches back into an inning that has ended.
+  const lastAtBat = atBats[atBats.length - 1];
+  const canUndo = !!lastAtBat && lastAtBat.inning >= game.inning;
 
   const focusPids: Set<number> | null = (() => {
     if (filter.kind === 'all' || n === 0) return null;
@@ -161,7 +172,7 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
             <button className="btn action k" onClick={() => record('K')} disabled={n === 0}>
               K
             </button>
-            <button className="btn action" onClick={() => undoLast(g)} disabled={atBats.length === 0}>
+            <button className="btn action" onClick={() => undoLast(g)} disabled={!canUndo}>
               ↶ Undo
             </button>
             <button className="btn action" onClick={endInning}>
@@ -176,7 +187,7 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
         <DueUp g={g} open={dueOpen} setOpen={setDueOpen} readOnly={readOnly} />
       </div>
 
-      <PrintSheet g={g} opp={opp} marks={marks} />
+      <PrintSheet g={g} opp={opp} marks={marks.map((m) => ({ ...m, frozen: false }))} />
 
       {panel === 'status' && <StatusSheet g={g} opp={opp} onClose={() => setPanel(null)} />}
 
