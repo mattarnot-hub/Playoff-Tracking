@@ -16,7 +16,7 @@ export function getHoldMs() {
   } catch {
     /* ignore */
   }
-  return 2000;
+  return 1500;
 }
 
 export default function Settings({ nav }: { nav: Nav }) {
