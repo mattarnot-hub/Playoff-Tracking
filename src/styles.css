@@ -725,12 +725,12 @@ select {
   opacity: 1;
 }
 .mark-inn {
-  font-size: 24px;
+  font-size: 12px;
   font-weight: 700;
   fill: var(--muted);
   paint-order: stroke;
   stroke: var(--bg);
-  stroke-width: 6px;
+  stroke-width: 3px;
   stroke-linejoin: round;
 }
 .mark-target {
