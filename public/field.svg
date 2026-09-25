@@ -9,25 +9,25 @@
   <!-- Fair territory grass -->
   <path d="M500,950 L47,497 A454,454 0 0 1 953,497 Z" fill="#eef3ea"/>
 
-  <!-- Infield dirt and home circle -->
-  <path d="M500,950 L353.4,803.4 A150,150 0 0 1 646.6,803.4 Z" fill="#f3ebdc"/>
-  <circle cx="500" cy="950" r="34" fill="#f3ebdc"/>
+  <!-- Infield dirt and home circle (drawn ~1.6x scale so ground balls have room) -->
+  <path d="M500,950 L265.4,715.4 A240,240 0 0 1 734.6,715.4 Z" fill="#f3ebdc"/>
+  <circle cx="500" cy="950" r="45" fill="#f3ebdc"/>
 
   <!-- Fence and foul lines -->
   <g fill="none" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke">
     <path d="M47,497 A454,454 0 0 1 953,497" vector-effect="non-scaling-stroke"/>
     <path d="M500,950 L47,497 M500,950 L953,497" vector-effect="non-scaling-stroke"/>
-    <path d="M353.4,803.4 A150,150 0 0 1 646.6,803.4" vector-effect="non-scaling-stroke"/>
-    <path d="M605,845 L500,740 L395,845" vector-effect="non-scaling-stroke"/>
+    <path d="M265.4,715.4 A240,240 0 0 1 734.6,715.4" vector-effect="non-scaling-stroke"/>
+    <path d="M668,782 L500,614 L332,782" vector-effect="non-scaling-stroke"/>
   </g>
 
   <!-- Bases, plate, rubber -->
   <g fill="#fff" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke">
-    <rect x="596" y="836" width="18" height="18" transform="rotate(45 605 845)" vector-effect="non-scaling-stroke"/>
-    <rect x="491" y="731" width="18" height="18" transform="rotate(45 500 740)" vector-effect="non-scaling-stroke"/>
-    <rect x="386" y="836" width="18" height="18" transform="rotate(45 395 845)" vector-effect="non-scaling-stroke"/>
+    <rect x="657" y="771" width="22" height="22" transform="rotate(45 668 782)" vector-effect="non-scaling-stroke"/>
+    <rect x="489" y="603" width="22" height="22" transform="rotate(45 500 614)" vector-effect="non-scaling-stroke"/>
+    <rect x="321" y="771" width="22" height="22" transform="rotate(45 332 782)" vector-effect="non-scaling-stroke"/>
     <path d="M490,942 L510,942 L510,952 L500,960 L490,952 Z" vector-effect="non-scaling-stroke"/>
-    <rect x="490" y="833" width="20" height="5" vector-effect="non-scaling-stroke"/>
+    <rect x="488" y="764" width="24" height="6" vector-effect="non-scaling-stroke"/>
   </g>
 
 

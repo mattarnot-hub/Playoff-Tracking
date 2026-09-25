@@ -145,6 +145,13 @@ export default function Field(props: Props) {
     loadFieldSvg().then(setSvg);
   }, []);
 
+  // If the phone locks or the app is backgrounded mid-press, the release never arrives; drop the press.
+  useEffect(() => {
+    const onHide = () => document.hidden && cancel();
+    document.addEventListener('visibilitychange', onHide);
+    return () => document.removeEventListener('visibilitychange', onHide);
+  }, []);
+
   function toViewBox(e: React.PointerEvent) {
     const ctm = overlay.current!.getScreenCTM()!.inverse();
     const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm);
@@ -158,7 +165,9 @@ export default function Field(props: Props) {
   }
 
   function onDown(e: React.PointerEvent<SVGSVGElement>) {
-    if (readOnly || press.current) return;
+    if (readOnly) return;
+    // A new touch always wins over a press whose release was lost, so the field can never get stuck.
+    if (press.current) cancel();
     e.preventDefault();
     try {
       overlay.current!.setPointerCapture(e.pointerId);
