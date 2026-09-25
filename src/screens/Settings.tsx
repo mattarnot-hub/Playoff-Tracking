@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db, exportAll, importAll, sortKey, todayIso, type Player } from '../db';
 import type { Nav } from '../App';
 import { AddPlayer } from './BattingOrder';
+import Logo from '../components/Logo';
 
 const HOLD_KEY = 'spray.holdMs';
 const HOLD_OPTIONS = [1500, 2000, 3000];
@@ -59,6 +60,7 @@ export default function Settings({ nav }: { nav: Nav }) {
   return (
     <div className="page">
       <header className="topbar">
+        <Logo />
         <button className="link" onClick={() => nav({ screen: 'setup' })}>
           ‹ Back
         </button>

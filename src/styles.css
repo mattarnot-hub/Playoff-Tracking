@@ -84,6 +84,18 @@ h2 {
   gap: 8px;
   min-height: 52px;
 }
+.logo {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px var(--brand);
+}
+.status-row .logo {
+  width: 30px;
+  height: 30px;
+  margin: 0 2px 0 4px;
+}
 .title {
   flex: 1;
   font-size: 22px;

@@ -6,6 +6,7 @@ import type { Nav } from '../App';
 import Field, { MarksLayer, zoneOf, type FieldMark } from '../components/Field';
 import Sheet from '../components/Sheet';
 import { getHoldMs } from './Settings';
+import Logo from '../components/Logo';
 
 type Filter = { kind: 'all' } | { kind: 'up' } | { kind: 'next3' } | { kind: 'player'; playerId: number };
 type Panel = null | 'status' | 'menu' | { mark: number } | { assign: number };
@@ -91,6 +92,7 @@ export default function SprayChart({ gameId, nav }: { gameId: number; nav: Nav }
     <div className="chart-page">
       <div className="chart-main">
         <div className="status-row">
+          <Logo />
           <button className="status-line" onClick={() => !readOnly && setPanel('status')} disabled={readOnly}>
             {scoreLine} · At-bat {rows.reduce((s, r) => s + r.count, 0) + (readOnly ? 0 : 1)}
           </button>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, FIELDS, fmtDate, OUR_TEAM, todayIso } from '../db';
 import type { Nav } from '../App';
+import Logo from '../components/Logo';
 
 export default function Setup({ nav }: { nav: Nav }) {
   const teams = useLiveQuery(() => db.teams.orderBy('name').toArray(), []) ?? [];
@@ -44,6 +45,7 @@ export default function Setup({ nav }: { nav: Nav }) {
   return (
     <div className="page">
       <header className="topbar">
+        <Logo />
         <h1 className="title">
           {OUR_TEAM} vs. {teamId ? teamName(teamId) : '…'}
         </h1>

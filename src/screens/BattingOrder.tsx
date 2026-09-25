@@ -4,6 +4,7 @@ import { db, fullName, OUR_TEAM, setLineup, sortKey, type Player } from '../db';
 import type { Nav } from '../App';
 import PhotoViewer from '../components/PhotoViewer';
 import Sheet from '../components/Sheet';
+import Logo from '../components/Logo';
 
 const MAX = 15;
 const ROW_H = 56;
@@ -96,6 +97,7 @@ export default function BattingOrder({ gameId, nav }: { gameId: number; nav: Nav
   return (
     <div className="page order-page">
       <header className="topbar">
+        <Logo />
         <button className="link" onClick={() => nav(inProgress ? { screen: 'chart', gameId } : { screen: 'setup' })}>
           ‹ {inProgress ? 'Chart' : 'Back'}
         </button>
